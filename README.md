@@ -66,6 +66,26 @@ This project is a full-stack web application designed to automate the retrieval 
    ```
 
 3. Set up Apache Kafka and ensure the topic is configured.
+* Download the latest version of Apache Kafka from https://kafka.apache.org/downloads
+* Navigate to the downloaded Kafka folder (ex: `kafka-3.9.0-src`) in three terminal tabs and run the following in each tab:
+   ```bash
+   # Run Zookeeper
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+
+   # Run server
+   bin/kafka-server-start.sh config/server.properties
+   
+   # Run standalone server
+   bin/connect-standalone.sh config/connect-standalone.properties
+   ```
+* Create a new topic called products with 2 partitions
+   ```bash
+   bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2 --topic products
+   ```
+* To check the list of topics, run `bin/kafka-topics.sh --bootstrap-server localhost:9092 --list`
+* To check the messages in the topic, run `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic products --from-beginning`
+* To get information about the topic, run `bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic products`
+* To delete the topic, run `bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic products`
 
 4. Run the backend (`src/main/java/com/activity/product_scout/ProductScoutApplication.java`):
 
