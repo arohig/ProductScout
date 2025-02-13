@@ -1,5 +1,5 @@
 
-# Shopping List Web Application
+# Product Scout Web Application
 
 This project is a full-stack web application designed to automate the retrieval of product information from shopping list(s) uploaded by the user. The application uses React, REST API, and Apache Kafka, along with other technologies.
 
