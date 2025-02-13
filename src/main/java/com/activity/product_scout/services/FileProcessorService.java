@@ -19,12 +19,14 @@ public class FileProcessorService {
 
     public void processFile(String file) {
         try {
-            Scanner sc = new Scanner(new File("input/"+file));
+            File fileToRead = new File("input/"+file);
+            Scanner sc = new Scanner(fileToRead);
 
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 messageProducer.sendMessage("products", line);
             }
+            fileToRead.delete(); // delete file after processing
         } catch (FileNotFoundException e) {
             logger.log(System.Logger.Level.ERROR, "File {0} not found", file);
         }

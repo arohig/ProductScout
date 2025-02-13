@@ -42,9 +42,10 @@ public class StartupComponent implements CommandLineRunner {
                         WatchEvent<Path> ev = (WatchEvent<Path>) event;
                         Path fileName = ev.context();
 
-                        logger.log(System.Logger.Level.INFO, "File {0} added to local directory", fileName);
-                        
-                        fileProcessorService.processFile(fileName.toString());
+                        if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+                            logger.log(System.Logger.Level.INFO, "File {0} added to local directory", fileName);
+                            fileProcessorService.processFile(fileName.toString());
+                        }
                     }
                 key.reset();
             }

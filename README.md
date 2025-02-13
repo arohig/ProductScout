@@ -14,32 +14,29 @@ This project is a full-stack web application designed to automate the retrieval 
 ## Workflow
 
 1. **Frontend Interaction**:  
-   The user uploads a shopping list file through the React frontend.
+   The user uploads a shopping list file or types a product name through the React frontend. 
+<img src="images/frontend-submit.png" alt="drawing" width="550"/>
 
-<img src="images/upload-shopping-list.png" alt="drawing" width="250"/>
+2. **File Upload and Handling**:  
+* _Upload Shopping List_ option: A POST request is sent to the backend with the uploaded file. The backend stores the uploaded file in the `input` folder of the local directory.
+* _Type a Product Name_ option: A POST request is sent to the backend with the product name, and a file is created in the `input` folder of the local directory. The new file has the product name written to it.
 
-2. **File Upload**:  
-   A POST request is sent to the backend with the uploaded file.
-
-3. **File Handling**:  
-   The backend stores the uploaded file in the `input` folder of the local directory.
-
-4. **File Processing**:  
+3. **File Processing**:  
    A service listens for new files in the `input` folder. When a new file is detected, it triggers the file processor service.
 
-5. **Message Production**:  
+4. **Message Production**:  
    The file processor service breaks the file into individual messages (one per line) and sends these messages to a Kafka topic using a Kafka message producer.
 
-6. **Message Consumption**:  
+5. **Message Consumption**:  
    The Kafka message consumer listens for messages from the Kafka topic and processes them as they arrive.
 
-7. **Message Processing**:  
+6. **Message Processing**:  
    Upon receiving a message, the message processor service creates a product and uses the web scraper to extract relevant product details.
 
-8. **Backend Update**:  
+7. **Backend Update**:  
    The message processor sends a PUT request with the extracted product information to the backend.
 
-9. **Frontend Display**:  
+8. **Frontend Display**:  
    The frontend fetches the product information from the backend and displays it to the user.
 
 ## Technologies Used

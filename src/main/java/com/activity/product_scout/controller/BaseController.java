@@ -35,4 +35,25 @@ public class BaseController {
 
         return new ResponseEntity<>(fileName, HttpStatus.CREATED);
     }
+
+    /* Create new file with item when user enters an item */
+    @PostMapping(value = "/enterItem", consumes = "text/plain")
+    public ResponseEntity<String> enterItem(@RequestBody String item) {
+        logger.log(System.Logger.Level.INFO, "Received a request of item {0} from user", item); // log item
+
+        // Write item to file
+        String uploadDir = System.getProperty("user.dir") + "/input";
+        try {
+            File file = new File(uploadDir + "/user_items.txt");
+            file.createNewFile();
+
+            java.io.FileWriter writer = new java.io.FileWriter(file);
+            writer.write(item);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(item, HttpStatus.CREATED);
+    }
 }

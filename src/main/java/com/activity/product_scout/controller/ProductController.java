@@ -23,9 +23,12 @@ public class ProductController {
     // PUT endpoint to add products
     @PutMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        logger.log(System.Logger.Level.INFO, "Product {0} has been added to the website", product.getName());
-        productRepository.add(product);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        if (productRepository.add(product) == true) {
+            logger.log(System.Logger.Level.INFO, "Product {0} has been added to the website", product.getName());
+            return new ResponseEntity<>(product, HttpStatus.CREATED);
+        }
+        logger.log(System.Logger.Level.INFO, "Product {0} already exists", product.getName());
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     // GET endpoint to retrieve all products

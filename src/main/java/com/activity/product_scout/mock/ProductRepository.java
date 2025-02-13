@@ -10,14 +10,15 @@ import com.activity.product_scout.models.Product;
 public class ProductRepository {
     private List<Product> products = new ArrayList<>();
 
-    public void add(Product product){
+    public boolean add(Product product) { // returns true if the product was added successfully
         // check if product already exists
         for (Product p : this.products){
-            if (p.getName() == product.getTitle()){
-                return;
+            if (p.getTitle().equals(product.getTitle())) {
+                return false;
             }
         }
         this.products.add(product);
+        return true;
     }
 
     public Product getProduct(int name){
