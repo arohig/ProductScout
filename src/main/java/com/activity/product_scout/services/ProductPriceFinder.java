@@ -56,34 +56,9 @@ public class ProductPriceFinder {
         if (priceElement == null) {
             return null;
         } if (brandName == null) {
-            // logger.log(System.Logger.Level.INFO, priceElement.text() + " " + productName.text());
             return new String[] {productName.text(), priceElement.text(), baseUrl + productLink.attr("href")}; // return title, price, URL
         }
 
-        // logger.log(System.Logger.Level.INFO, priceElement.text() + " " + brandName.text() + " " + productName.text());
-        // logger.log(System.Logger.Level.INFO, "link: " + baseUrl + productLink.attr("href"));
         return new String[] {brandName.text() + " " + productName.text(), priceElement.text(), baseUrl + productLink.attr("href")}; // return title, price, URL
-    }
-
-    // Extract lowest price from HTML page
-    public static String extractLowestPrice(String html) {
-        // Parse the HTML using Jsoup
-        Document doc = Jsoup.parse(html);
-
-        // Extract first price based on store-specific HTML structure
-        Element priceElement = doc.selectFirst("span.price-update");
-        logger.log(System.Logger.Level.INFO, "price element: " + priceElement.text());
-        return (priceElement != null) ? priceElement.text() : "Price not found";
-    }
-
-    // Extract most economical deal from HTML page
-    public static String extractMostEconomical(String html) {
-        // Parse the HTML using Jsoup
-        Document doc = Jsoup.parse(html);
-
-        // Extract first price based on store-specific HTML structure
-        Element priceElement = doc.selectFirst("span.price-update");
-        logger.log(System.Logger.Level.INFO, "price element: " + priceElement.text());
-        return (priceElement != null) ? priceElement.text() : "Price not found";
     }
 }

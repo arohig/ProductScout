@@ -18,6 +18,7 @@ public class BaseController {
         return "TEST: Welcome to this server";
     }
 
+    /* Save file to input folder when user uploads file */
     @PostMapping(value = "/uploadFile", consumes = "multipart/form-data")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();

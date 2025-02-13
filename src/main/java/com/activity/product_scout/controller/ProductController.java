@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    // PUT endpoint to receive and save products
+    // PUT endpoint to add products
     @PutMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         logger.log(System.Logger.Level.INFO, "Product {0} has been added to the website", product.getName());
@@ -34,28 +34,4 @@ public class ProductController {
         List<Product> products = productRepository.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-
-    // @GetMapping(value = "/getPrice")
-    // public ResponseEntity<Product> getProduct(@RequestBody ) {
-    //     Product product = this.productRepo.getProduct(id);
-    //     return new ResponseEntity<>(product, HttpStatus.FOUND);
-    // }
-    // @GetMapping(value = "/getPrice")
-    // public ResponseEntity<Product> getProduct(@RequestBody String product) {
-    //     Map<String, BigDecimal> priceMapping = this.productPriceService.getPrices(product);
-
-    //     // TODO: store fetched price in PostgreSQL
-
-    //     return new ResponseEntity<>(product, HttpStatus.FOUND);
-    // }
-
-    // @GetMapping(value = "/all")
-    // public ResponseEntity<List<Product>> getProducts() {
-    //     return new ResponseEntity<>(product, HttpStatus.FOUND);
-    // }
-
-    // @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
-    // public ResponseEntity<Product> add(@RequestBody Product product) {
-    //     return new ResponseEntity<>(product, HttpStatus.CREATED);
-    // }
 }

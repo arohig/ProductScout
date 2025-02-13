@@ -13,6 +13,7 @@ public class MessageConsumer {
     @Autowired
     private MessageProcessorService messageProcessorService;
 
+    /* Consume messages from the Kafka topic */
     @KafkaListener(topics = "products", groupId = "consumer_group")
     public void consume(String message) {
         logger.log(System.Logger.Level.INFO, "Message consumed: {0}", message);

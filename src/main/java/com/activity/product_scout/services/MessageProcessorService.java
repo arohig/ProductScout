@@ -23,6 +23,7 @@ public class MessageProcessorService {
     @Value("${rest.url}")
     private String restUrl;
 
+    /* Create product object from message */
     public void processMessage(String message) {
         try {
             String[] productDetails = ProductPriceFinder.getProductDetails(message); // Get product details
@@ -33,14 +34,13 @@ public class MessageProcessorService {
             product.setPrice(Double.parseDouble(productDetails[1].replace("$", "")));
             product.setUrl(productDetails[2]);
 
-            // logger.log(System.Logger.Level.INFO, "Product: {0} {1} {2} {3}", product.getName(), product.getTitle(), product.getPrice(), product.getUrl());
-
             putProduct(product);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
     
+    /* Send product to REST API */
     public void putProduct(Product product) {
         try {
             String jsonProduct = objectMapper.writeValueAsString(product); // convert the Product object to JSON

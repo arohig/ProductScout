@@ -1,6 +1,5 @@
 package com.activity.product_scout.components;
 
-import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,24 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.activity.product_scout.services.FileProcessorService;
 
-// public class StartupComponent implements CommandLineRunner {
-//     private final FileProcessorService fileProcessorService;
-
-//     public StartupComponent(FileProcessorService fileProcessorService) {
-//         this.fileProcessorService = fileProcessorService;
-//     }
-
-//     @Override
-//     public void run(String... args) throws Exception {
-//         // process all files in the input directory
-//         File inputDir = new File("input");
-//         File[] files = inputDir.listFiles();
-//         for (File file : files) {
-//             fileProcessorService.processFile(file.getAbsolutePath());
-//         }
-//     }
-// }
-
 @Component
 public class StartupComponent implements CommandLineRunner {
     private static final System.Logger logger = System.getLogger(StartupComponent.class.getName());
@@ -40,13 +21,11 @@ public class StartupComponent implements CommandLineRunner {
     @Autowired
     private FileProcessorService fileProcessorService;
 
-    /* Listens for changes in the input directory and calls the file processor service on new files */
+    /* Listen for changes in the input directory and calls the file processor service on new files */
     @Override
     public void run(String... args) throws Exception {
         String inputDir = System.getProperty("user.dir") + "/input";
         Path inputDirPath = Paths.get(inputDir);
-
-        logger.log(System.Logger.Level.INFO, "directory " + inputDir);
 
         try {
             // create a watcher for the file system
@@ -62,7 +41,6 @@ public class StartupComponent implements CommandLineRunner {
                         // Get the new file name
                         WatchEvent<Path> ev = (WatchEvent<Path>) event;
                         Path fileName = ev.context();
-                        Path child = inputDirPath.resolve(fileName);
 
                         logger.log(System.Logger.Level.INFO, "File {0} added to local directory", fileName);
                         

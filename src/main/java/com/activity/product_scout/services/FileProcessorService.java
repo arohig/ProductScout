@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.activity.product_scout.components.MessageProducer;
 
-/* Split file into products */
+/* Split file into messages to send to queue */
 @Service
 public class FileProcessorService {
     private static final System.Logger logger = System.getLogger(FileProcessorService.class.getName());
@@ -27,7 +27,6 @@ public class FileProcessorService {
             }
         } catch (FileNotFoundException e) {
             logger.log(System.Logger.Level.ERROR, "File {0} not found", file);
-            logger.log(System.Logger.Level.ERROR, e.getMessage(), e);
         }
     }
 }

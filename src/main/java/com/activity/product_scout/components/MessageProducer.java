@@ -11,6 +11,7 @@ public class MessageProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    /* Send message to Kafka topic */
     public void sendMessage(String topic, String message) {
         kafkaTemplate.send(topic, message);
         logger.log(System.Logger.Level.INFO, "Message produced: {0}", message);
