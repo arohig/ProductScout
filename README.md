@@ -45,6 +45,8 @@ This project is a full-stack web application designed to automate the retrieval 
 - **Backend**: REST API, Spring Boot, Spring MVC
 - **Real-Time Messaging**: Apache Kafka
 - **Web Scraping**: Jsoup (Java library for HTML parsing and extraction)
+- **Database**: PostgreSQL (_in progress_)
+- **Cloud Deployment**: Docker, Kubernetes (_in progress_)
 
 ## Setup Instructions
 
